@@ -1,0 +1,9 @@
+<li class="country-list__item">
+    <h2>{{name}}</h2>
+    <p>Capital: {{capital}}</p>
+    <p>Population: {{population}}</p>
+    <p>Language: {{#each languages}}
+<li class="lang__item">{{this.name}}</li>
+{{/each}}</p>
+<img class="item" src="{{flag}}" alt="flag">
+</li>
