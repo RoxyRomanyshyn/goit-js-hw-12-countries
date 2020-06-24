@@ -12,30 +12,11 @@ import {
   success,
   error
 } from '@pnotify/core';
+import debounce from "lodash.debounce";
 
-// console.log(searchApi);
-const myAlert = alert({
-  text: "I'm an alert.",
-  type: 'info',
-});
 
-const myNotice = notice({
-  text: "I'm a notice.",
-});
 
-const myInfo = info({
-  text: "I'm an info message.",
-});
 
-const mySuccess = success({
-  text: "I'm a success message.",
-});
-
-const myError = error({
-  text: "I'm an error message.",
-});
-
-var debounce = require('lodash.debounce');
 const countList = document.querySelector('.country-list');
 const input = document.querySelector('#inp');
 
@@ -52,7 +33,7 @@ function onGetData(data) {
   if (data.length === 1) {
     printCountry(data[0]);
   } else {
-    if (data.length < 10) {
+    if (data.length <= 10) {
       printList(data);
     } else {
       printError(data);
@@ -70,4 +51,8 @@ function printList(dataCountries) {
   countList.insertAdjacentHTML('beforeend', countryList);
 }
 
-function printError() {}
+function printError() {
+  error({
+    text: "Too many matches found. Please enter a more specific query",
+  })
+}
